@@ -1,2 +1,4 @@
-from .RetinaFace import RetinaFace # noqa: F401
-from .type import Face, Bbox # noqa: F401
+from retinaface.RetinaFace import RetinaFace
+from retinaface.type import Bbox, Face
+
+__all__ = ['RetinaFace', 'Bbox', 'Face']
