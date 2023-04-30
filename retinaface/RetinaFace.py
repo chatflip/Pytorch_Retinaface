@@ -4,13 +4,13 @@ import cv2
 import numpy as np
 import numpy.typing as npt
 import torch
-from data import cfg_mnet, cfg_re50
-from layers.functions.prior_box import PriorBox
-from models._retinaface import _RetinaFace
-from type import Bbox, Face
-from utils.box_utils import decode, decode_landm
-from utils.load_model import load_model
-from utils.nms.py_cpu_nms import py_cpu_nms
+from .data import cfg_mnet, cfg_re50
+from .layers.functions.prior_box import PriorBox
+from .models._retinaface import _RetinaFace
+from .type import Bbox, Face
+from .utils.box_utils import decode, decode_landm
+from .utils.load_model import load_model
+from .utils.nms.py_cpu_nms import py_cpu_nms
 
 
 class RetinaFace:
