@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pytorch-retinaface"
+name = "retinaface"
 version = "0.0.0"
 description = ""
 authors = ["chatflip <oo.chat.flip@gmail.com>"]
