@@ -134,8 +134,6 @@ class RetinaFace:
         dets = np.concatenate((dets, landms), axis=1)
         results: list[Face] = []
         for det in dets:
-            print(det)
-
             top_right = np.array([det[0], det[1]], dtype=np.int64)
             bottom_left = np.array([det[2], det[3]], dtype=np.int64)
             bbox = Bbox(top_right, bottom_left)
