@@ -6,20 +6,19 @@ authors = ["chatflip <oo.chat.flip@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">3.7, <4.0"
+python = ">3.8, <4.0"
 
 [tool.poetry.group.dev.dependencies]
-torch = ">1.1.0"
-torchvision = ">0.3.0"
+torch = ">1.1.0, <2.0.0"
+torchvision = ">0.3.0, <0.15.0"
 opencv-python = "*"
-
 pysen = "^0.10"
 black = "21.10b0"
 flake8 = "4.0.1"
 isort = "5.10.1"
 mypy = "0.910"
 click = "8.0.2"
-pytest = "^7.3.1"
+pytest = "*"
 
 [tool.pysen]
 version = "0.10"
@@ -33,10 +32,16 @@ mypy_preset = "very_strict"
 line_length = 88
 py_version = "py39"
 [[tool.pysen.lint.mypy_targets]]
-paths = ["retinaface/RFace.py"]
+paths = [
+    "retinaface/RetinaFace.py",
+    "retinaface/type.py",
+]
 
 [tool.pysen.lint.source]
-include_globs = ["retinaface/RFace.py"]
+include_globs = [
+    "retinaface/RetinaFace.py",
+    "retinaface/type.py"
+]
 
 [tool.isort]
 target-version = ["py39"]
