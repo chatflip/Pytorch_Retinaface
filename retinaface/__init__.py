@@ -1,1 +1,2 @@
-from Retinaface import RetinaFace
+from RetinaFace import RetinaFace
+from type import Face, Bbox
