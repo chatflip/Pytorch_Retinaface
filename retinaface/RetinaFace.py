@@ -39,9 +39,9 @@ class RetinaFace:
         model = _RetinaFace(
             cfg=cfg,
             phase="test",
-        )
+        )  # type: ignore
         is_cpu = device == "cpu"
-        model = load_model(model, weight_path, is_cpu)
+        model = load_model(model, weight_path, is_cpu)  # type: ignore
         model.eval()
         self.device = torch.device(device)
         self.model = model.to(device)
@@ -83,13 +83,13 @@ class RetinaFace:
         priors = priorbox.forward()
         priors = priors.to(self.device)
         prior_data = priors.data
-        boxes = decode(loc.data.squeeze(0), prior_data, self.cfg["variance"])
+        boxes = decode(loc.data.squeeze(0), prior_data, self.cfg["variance"])  # type: ignore
         boxes = boxes * scale / resize
         boxes = boxes.cpu().numpy()
         scores = conf.squeeze(0).data.cpu().numpy()[:, 1]
         landms = decode_landm(
             landms.data.squeeze(0), prior_data, self.cfg["variance"]
-        ).cpu()
+        ).cpu()  # type: ignore
         scale1 = torch.Tensor(
             [
                 img.shape[3],  # type: ignore
@@ -123,7 +123,7 @@ class RetinaFace:
 
         # do NMS
         dets = np.hstack((boxes, scores[:, np.newaxis])).astype(np.float32, copy=False)
-        keep = py_cpu_nms(dets, self.nmf_thre)
+        keep = py_cpu_nms(dets, self.nmf_thre)  # type: ignore
         # keep = nms(dets, args.nms_threshold,force_cpu=args.cpu)
         dets = dets[keep, :]
         landms = landms[keep]
@@ -134,15 +134,15 @@ class RetinaFace:
         dets = np.concatenate((dets, landms), axis=1)
         results: list[Face] = []
         for det in dets:
-            top_right = np.array([det[0], det[1]], dtype=np.int64)
-            bottom_left = np.array([det[2], det[3]], dtype=np.int64)
+            top_right = np.array([det[0], det[1]], dtype=np.uint64)
+            bottom_left = np.array([det[2], det[3]], dtype=np.uint64)
             bbox = Bbox(top_right, bottom_left)
             confidence = float(det[4])
-            left_eye = np.array([det[5], det[6]], dtype=np.int64)
-            right_eye = np.array([det[7], det[8]], dtype=np.int64)
-            nose = np.array([det[9], det[10]], dtype=np.int64)
-            mouth_right = np.array([det[11], det[12]], dtype=np.int64)
-            mouth_left = np.array([det[13], det[14]], dtype=np.int64)
+            left_eye = np.array([det[5], det[6]], dtype=np.uint64)
+            right_eye = np.array([det[7], det[8]], dtype=np.uint64)
+            nose = np.array([det[9], det[10]], dtype=np.uint64)
+            mouth_right = np.array([det[11], det[12]], dtype=np.uint64)
+            mouth_left = np.array([det[13], det[14]], dtype=np.uint64)
 
             results.append(
                 Face(

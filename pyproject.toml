@@ -31,16 +31,19 @@ enable_mypy = true
 mypy_preset = "very_strict"
 line_length = 88
 py_version = "py39"
-[[tool.pysen.lint.mypy_targets]]
-paths = [
-    "retinaface/RetinaFace.py",
-    "retinaface/type.py",
-]
 
 [tool.pysen.lint.source]
-include_globs = [
+includes = [
     "retinaface/RetinaFace.py",
     "retinaface/type.py"
+]
+include_globs = [
+    "tests/**/*.py",
+]
+
+[[tool.pysen.lint.mypy_targets]]
+paths = [
+    "retinaface/",
 ]
 
 [tool.isort]
